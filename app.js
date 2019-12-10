@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 
 // CONFIGS
 
-const env = require("./config.environment");
+const env = require("./config/environment");
 
 // ROUTERS
 
@@ -30,9 +30,12 @@ mongoose.connect(env.db, {
 });
 
 mongoose.connection.on("error", console.error);
+mongoose.connection.on("open", () => {
+  console.log("Database connection established...");
+});
 
 // VIEW ENGINE
-// view engine setup
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
